@@ -1,11 +1,11 @@
-int PARTICLES = 5000;
-int SPEED = 1;
-int POWER = 100;
+int PARTICLES =2000;
+int SPEED = 3;
+int POWER = 200;
+
 ArrayList<Particle> mParticles;
 
 void setup(){
-  size(1080, 640 , P2D);
-  stroke(245,236,217);
+  size(640, 360);
   mParticles = new ArrayList<Particle>();
   
   for(int i = 0; i<PARTICLES; i++){
@@ -16,35 +16,31 @@ void setup(){
     particle.dy = 0;
     particle.lastX = particle.x;
     particle.lastY = particle.y;
+    particle.colour = color(255);
     mParticles.add(particle);
   }
 }
 
 void draw(){
-    fill(59,59,59,100);
-    noStroke();
-    rect(0, 0, width, height);
-    stroke(245,236,217);
-
+    background(0);
+    
     Float angle;
     for(Particle particle : mParticles){
       particle.lastX = particle.x;
       particle.lastY = particle.y;
-    
+      
       angle = atan2( particle.y - mouseY, particle.x - mouseX );
       particle.dx -= SPEED * cos(angle);
       particle.dy -= SPEED * sin(angle);
       particle.x += particle.dx;
       particle.y += particle.dy;
-      particle.x *= 0.97;
-      particle.y *= 0.97;
-          stroke(particle.colour);
+      particle.x *= 0.95;
+      particle.y *= 0.95;
 
-
+      stroke(particle.colour);
       line( particle.lastX, particle.lastY, particle.x, particle.y);
     }
 }
-
 
 void mouseClicked() {
   float randAngle;
@@ -52,8 +48,8 @@ void mouseClicked() {
   for(Particle particle : mParticles){
     randAngle = random(1)* PI*2;
     randPower = random(1)* POWER/2;
-    particle.dx += randPower * cos(randAngle);
-    particle.dy += randPower * sin(randAngle);  
+    particle.dx = randPower * cos(randAngle);
+    particle.dy = randPower * sin(randAngle);  
   } 
 }
 
@@ -66,4 +62,5 @@ class Particle{
   float lastY;
   color colour;
 }
+
 
