@@ -17,6 +17,7 @@ void setup(){
     particle.lastX = particle.x;
     particle.lastY = particle.y;
     mParticles.add(particle);
+    particle.colour = color(245,236,217);
   }
 }
 
@@ -24,7 +25,6 @@ void draw(){
     fill(59,59,59,100);
     noStroke();
     rect(0, 0, width, height);
-    stroke(245,236,217);
 
     Float angle;
     for(Particle particle : mParticles){
@@ -38,7 +38,7 @@ void draw(){
       particle.y += particle.dy;
       particle.x *= 0.97;
       particle.y *= 0.97;
-          stroke(particle.colour);
+      stroke(particle.colour);
 
 
       line( particle.lastX, particle.lastY, particle.x, particle.y);
